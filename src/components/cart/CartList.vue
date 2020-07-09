@@ -57,7 +57,9 @@
 </template>
 
 <script>
+// mapGetters fasst unsere Getters in einem Object zusammen. 
 import { mapGetters } from "vuex"
+
 import CartListItem from "./CartListItem"
 export default {
   name: "CartList",
@@ -65,10 +67,21 @@ export default {
     CartListItem
   },
   computed: {
+    // Der Funktion mapGetters übergeben wir ein Array mit den Gettern die wir haben wollen und bekommen ein Objekt zurück.
+    // spread-operator (...) liefert uns nur die Elemente aus dem Objekt
     ...mapGetters([
       "cartItems",
       "cartTotal" 
     ]),
+    /* 
+    Äquivalent zum Objekt, dass mapGetters liefert. 
+    cartItems(){
+      return this.$store.getters.cartItems;
+    },
+    cartTotal(){
+      return this.$store.getters.cartTotal
+    },
+    */
     cartTotalWithoutTaxes(){
       return parseFloat(this.cartTotal - this.cartTaxes).toFixed(2)
     },
