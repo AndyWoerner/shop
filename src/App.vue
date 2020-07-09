@@ -39,4 +39,7 @@ export default {
 .color-vue2 {
   color: rgb(65, 184, 131);
 }
+.cursor-pointer {
+  cursor: pointer;
+}
 </style>

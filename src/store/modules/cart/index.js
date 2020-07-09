@@ -16,7 +16,19 @@ const actions = {
             .then((response) => {
                 commit("UPDATE_CART_ITEMS", response.data)
             })
-    }
+    },
+    addCartItem({ commit }, payload){
+        axios.post("/api/cart", payload)
+        .then((response) => {
+            commit("UPDATE_CART_ITEMS", response.data)
+        }) //wenn wir einen Datensatz hinzufügen in den Warenkorb, bekommen wir den kompletten Inhalt des aktuellen Warenkorb zurückgeliefert
+    },
+    removeCartItem({ commit }, payload){
+        axios.post("/api/cart/delete", payload)
+        .then((response) => {
+            commit("UPDATE_CART_ITEMS", response.data)
+        }) //Beim Löschen des Items wird ein spezieller Endpoint genutzt. Auf dem Server passiert das Löschen mit Hilfe der ID. Zurück kommt wieder der aktuelle Warenkorb
+    },
 }
 
 const getters = {
