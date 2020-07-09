@@ -13,13 +13,12 @@
         </button>
       </li>
       <li>
-        <button class="btn bg-vue" data-tip="Zum Warenkorb">
+        <button class="btn bg-vue" data-tip="Zum Warenkorb" @click="addProductToCart(productItem)">
           <i class="fa fa-shopping-cart"></i>
         </button>
       </li>
     </ul>
-    <div
-      v-if="getDiscount >= 20">
+    <div v-if="getDiscount >= 20">
       <span class="product-sale-label bg-vue">Sale</span>
       <span class="product-discount-label bg-vue2">{{getDiscount}}%</span>
     </div>
@@ -30,10 +29,7 @@
       <div class="text-center mt-3">
         <div class="lead">
           <strong class="color-vue">{{productItem.price}}</strong>
-          <span 
-            class="ml-4 color-vue2"
-            v-if="productItem.price !== productItem.origPrice"
-            >
+          <span class="ml-4 color-vue2" v-if="productItem.price !== productItem.origPrice">
             <del>{{productItem.origPrice}}</del>
           </span>
         </div>
@@ -51,6 +47,11 @@ export default {
       return parseFloat(
         (1 - this.productItem.price / this.productItem.origPrice) * 100
       ).toFixed(0);
+    }
+  },
+  methods: {
+    addProductToCart(productItem) {
+      this.$store.dispatch("addCartItem", productItem)
     }
   }
 };
