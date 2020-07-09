@@ -1,5 +1,4 @@
 <template>
-  <!-- Warenkorb Bestellübersicht -->
   <div class="container-fluid">
     <div class="row">
       <div class="col-4 p-5">

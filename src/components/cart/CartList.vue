@@ -20,28 +20,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="i in 3" :key="i">
-          <th>
-            <div class="p-2">
-              <img src="https://picsum.photos/70" width="70" class="img-fluid rounded shadow-sm" />
-              <div class="ml-3 d-inline-block align-middle">
-                <h5 class="mb-0">
-                  <div class="text-dark d-inline-block align-middle">Produktname</div>
-                </h5>
-                <span class="text-muted font-weight-normal font-italic">Kategorie: Uhren</span>
-              </div>
-            </div>
-          </th>
-          <td class="align-middle">
-            <strong>79,00 €</strong>
-          </td>
-          <td class="align-middle">
-            <strong>3</strong>
-          </td>
-          <td class="align-middle">
-            <i class="fa fa-trash"></i>
-          </td>
-        </tr>
+        <CartListItem 
+          v-for="cartItem in cartItems"
+          :key="cartItem.id"
+          :cartItem="cartItem"
+          />
       </tbody>
     </table>
 
@@ -52,19 +35,19 @@
       <ul class="list-unstyled mb-4">
         <li class="d-flex justify-content-between pb-3">
           <strong class="text-muted">Zwischensumme</strong>
-          <strong>390,00 €</strong>
+          <strong>{{cartTotalWithoutTaxes}} €</strong>
         </li>
         <li class="d-flex justify-content-between py-3">
           <strong class="text-muted">MwSt.</strong>
-          <strong>74,10 €</strong>
+          <strong>{{cartTaxes}} €</strong>
         </li>
         <li class="d-flex justify-content-between py-3">
           <strong class="text-muted">Versandkosten</strong>
-          <strong>0,00 €</strong>
+          <strong>{{cartShipping}} €</strong>
         </li>
         <li class="d-flex justify-content-between py-3">
           <strong class="text-muted">Gesamtkosten</strong>
-          <h5 class="font-weight-bold">464,10 €</h5>
+          <h5 class="font-weight-bold">{{cartTotal}} €</h5>
         </li>
       </ul>
       <button class="btn bg-vue rounded-pill py-2 btn-block">Zur Kasse</button>
@@ -74,8 +57,34 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex"
+import CartListItem from "./CartListItem"
 export default {
-  name: "CartList"
+  name: "CartList",
+  components: {
+    CartListItem
+  },
+  computed: {
+    ...mapGetters([
+      "cartItems",
+      "cartTotal" 
+    ]),
+    cartTotalWithoutTaxes(){
+      return parseFloat(this.cartTotal - this.cartTaxes).toFixed(2)
+    },
+    cartTaxes(){
+      return (this.cartTotal * 0.19).toFixed(2)
+    },
+    cartShipping(){
+      return 9.99
+    },
+    cartTotalWithShipping(){
+      return(parseFloat(this.cartTotal) + parseFloat(this.carShipping)).toFixed(2)
+    }
+  },
+  created(){
+    this.$store.dispatch("getCartItems")
+  }
 };
 </script>
 
