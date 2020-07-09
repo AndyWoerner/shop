@@ -29,6 +29,12 @@ const actions = {
             commit("UPDATE_CART_ITEMS", response.data)
         }) //Beim Löschen des Items wird ein spezieller Endpoint genutzt. Auf dem Server passiert das Löschen mit Hilfe der ID. Zurück kommt wieder der aktuelle Warenkorb
     },
+    removeAllCartItems ({commit}) {
+        axios.post("/api/cart/delete/all")
+            .then((response) => {
+                commit("UPDATE_CART_ITEMS", response.data)
+            })
+    }
 }
 
 const getters = {
@@ -37,6 +43,11 @@ const getters = {
        return state.cartItems.reduce((acc, cartItem) => {
             return (cartItem.quantity * cartItem.price) + acc
         }, 0).toFixed(2)
+    },
+    cartQuantity: state => {
+        return state.cartItems.reduce((acc, cartItem) => {
+            return cartItem.quantity + acc
+        }, 0)
     }
 }
 
