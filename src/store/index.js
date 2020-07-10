@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 // Module importieren
 import cart from "./modules/cart"
 import product from "./modules/product"
+import favorite from "./modules/favorite"
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -15,6 +16,7 @@ export default new Vuex.Store({
   // },
   modules: {
     cart,
-    product
+    product,
+    favorite
   }
 })

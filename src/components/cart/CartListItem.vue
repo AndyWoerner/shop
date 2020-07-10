@@ -28,7 +28,10 @@
       </div>
     </td>
     <td class="align-middle">
-      <i class="fa fa-trash"></i>
+      <i 
+        class="fa fa-trash cursor-pointer"
+        @click="removeProductFromCart(cartItem)"
+        ></i>
     </td>
   </tr>
 </template>
@@ -41,7 +44,8 @@ export default {
   methods: {
       ...mapActions([
           "addCartItem",
-          "removeCartItem"
+          "removeCartItem",
+          "removeProductFromCart"
       ])
   }
 };

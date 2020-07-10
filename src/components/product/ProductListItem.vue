@@ -8,8 +8,21 @@
         </button>
       </li>
       <li>
-        <button class="btn bg-vue" data-tip="Merkzettel">
+        <button
+          class="btn bg-vue"
+          data-tip="Merkzettel"
+          @click="addProductToFavorites(productItem)"
+          v-if="!isFavorite"
+        >
           <i class="far fa-heart"></i>
+        </button>
+        <button
+          class="btn bg-vue"
+          data-tip="Merkzettel"
+          @click="removeProductToFavorites(productItem)"
+          v-if="isFavorite"
+        >
+          <i class="fas fa-heart"></i>
         </button>
       </li>
       <li>
@@ -24,7 +37,15 @@
     </div>
 
     <div class="card-body">
-      <h6 class="card-title">{{ productItem.title}}</h6>
+      <h6 class="card-title">{{ productItem.title}}
+        <span
+          v-if="isFavorite"
+          class="float-right"
+          >
+          <i class="fas fa-heart"></i>
+        </span>
+      </h6>
+
       <p class="card-subtitle text-muted">{{productItem.description}}</p>
       <div class="text-center mt-3">
         <div class="lead">
@@ -47,11 +68,20 @@ export default {
       return parseFloat(
         (1 - this.productItem.price / this.productItem.origPrice) * 100
       ).toFixed(0);
+    },
+    isFavorite() {
+      return this.$store.getters.isFavorite(this.productItem);
     }
   },
   methods: {
     addProductToCart(productItem) {
-      this.$store.dispatch("addCartItem", productItem)
+      this.$store.dispatch("addCartItem", productItem);
+    },
+    addProductToFavorites(productItem) {
+      this.$store.dispatch("addFavoriteItem", productItem);
+    },
+    removeProductToFavorites(productItem){
+       this.$store.dispatch("removeFavoriteItem", productItem);
     }
   }
 };

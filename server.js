@@ -38,13 +38,7 @@ app.get('/cart', (req, res) => {
 app.post('/cart', (req, res) => {
   fs.readFile(CART_DATA_FILE, (err, data) => {
     const cartProducts = JSON.parse(data);
-    const newCartProduct = { 
-      id: req.body.id, 
-      title: req.body.title, 
-      description: req.body.description, 
-      price: req.body.price, 
-      quantity: 1 
-    };
+    const newCartProduct = { id: req.body.id, title: req.body.title, description: req.body.description, price: req.body.price, quantity: 1 };
     let cartProductExists = false;
     cartProducts.map((cartProduct) => {
       if (cartProduct.id === newCartProduct.id) {
@@ -74,6 +68,22 @@ app.post('/cart/delete', (req, res) => {
     fs.writeFile(CART_DATA_FILE, JSON.stringify(cartProducts, null, 4), () => {
       res.setHeader('Cache-Control', 'no-cache');
       res.json(cartProducts);
+    });
+  });
+});
+
+// Einzelnes Item löschen
+app.post('/cart/product/delete', (req, res) => {
+  fs.readFile(CART_DATA_FILE, (err, data) => {
+    let cartProducts = JSON.parse(data);
+
+    const filteredCartItems = cartProducts.filter((cartProduct) => {
+      return cartProduct.id != req.body.id;
+    });
+
+    fs.writeFile(CART_DATA_FILE, JSON.stringify(filteredCartItems, null, 4), () => {
+      res.setHeader('Cache-Control', 'no-cache');
+      res.json(filteredCartItems);
     });
   });
 });
