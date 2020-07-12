@@ -19,7 +19,7 @@
         <button
           class="btn bg-vue"
           data-tip="Merkzettel"
-          @click="removeProductToFavorites(productItem)"
+          @click="removeProductFromFavorites(productItem)"
           v-if="isFavorite"
         >
           <i class="fas fa-heart"></i>
@@ -37,11 +37,9 @@
     </div>
 
     <div class="card-body">
-      <h6 class="card-title">{{ productItem.title}}
-        <span
-          v-if="isFavorite"
-          class="float-right"
-          >
+      <h6 class="card-title">
+        {{ productItem.title}}
+        <span v-if="isFavorite" class="float-right">
           <i class="fas fa-heart"></i>
         </span>
       </h6>
@@ -60,6 +58,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex"
+
 export default {
   name: "ProductListItem",
   props: ["productItem"],
@@ -74,17 +74,24 @@ export default {
     }
   },
   methods: {
-    addProductToCart(productItem) {
-      this.$store.dispatch("addCartItem", productItem);
-    },
-    addProductToFavorites(productItem) {
-      this.$store.dispatch("addFavoriteItem", productItem);
-    },
-    removeProductToFavorites(productItem){
-       this.$store.dispatch("removeFavoriteItem", productItem);
-    }
+    ...mapActions ({
+      addProductToCart: "addCartItem",
+      addProductToFavorites: "addFavoriteItem",
+      removeProductFromFavorites: "removeFavoriteItem"
+    })
+
+    //das wird ersetzt furch mapActions
+    // addProductToCart(productItem) {
+    //   this.$store.dispatch("addCartItem", productItem);
+    // },
+    // addProductToFavorites(productItem) {
+    //   this.$store.dispatch("addFavoriteItem", productItem);
+    // },
+    // removeProductFromFavorites(productItem){
+    //    this.$store.dispatch("removeFavoriteItem", productItem);
+    // }
   }
-};
+}  
 </script>
 
 <style scoped>
