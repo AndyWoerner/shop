@@ -4,8 +4,16 @@
       
       <div class="col-12">
         <Navbar />
+        <router-view></router-view>
       </div>
+  
+      <!-- Navbar ist nun immer vorhanden. router-view ändert sich wenn URL gewechselt wird. -->
+      <!-- Package sind nach diesem Tag und ersetzt es mit den entpsrechend in router.js definierten Components  -->
       
+
+    
+    </div>
+    <!-- <div class="row">
       <div class="col-4 p-4">
         <CartList />
       </div>
@@ -13,20 +21,25 @@
       <div class="col-8 p-5">
         <ProductList />
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
 import Navbar from "./components/Navbar";
-import CartList from "./components/cart/CartList";
-import ProductList from "./components/product/ProductList";
-export default {
+// import CartList from "./components/cart/CartList";
+// import ProductList from "./components/product/ProductList";
+
+ export default {
   name: "App",
   components: {
     Navbar,
-    CartList,
-    ProductList
+    // CartList,
+    // ProductList
+  },
+  created(){
+    this.$store.dispatch("getCartItems")
+    this.$store.dispatch("getProductItems")
   }
 };
 </script>

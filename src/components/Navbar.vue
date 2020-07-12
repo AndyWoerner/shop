@@ -1,20 +1,20 @@
 <template>
     <nav class="navbar navbar-expand-lg bg-vue">
         <div class="container">
-            <a href="" class="navbar-brand">Andys Shop</a>
+            <router-link to="/" class="navbar-brand"> Andys Shop</router-link>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a href="" class="nav-link">Shop</a>
+                    <router-link to="/" class="nav-link">Shop</router-link>
                 </li>
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="" class="nav-link"><i class="fas fa-sign-in-alt mr-2"></i>Login</a>
+                    <router-link to="/" class="nav-link"><i class="fas fa-sign-in-alt mr-2"></i>Login</router-link>
                 </li>
                 <li class="nav-item bg-vue2 ml-4 rounded">
-                    <a href="" class="nav-link">
-                        <i class="fas fa-cart-arrow-down"></i>6 Artikel (120.34€)
-                    </a>
+                    <router-link to="/cart" class="nav-link">
+                        <i class="fas fa-cart-arrow-down"></i>{{cartQuantity}} Artikel ({{cartTotal}} €)
+                    </router-link>
                 </li>
             </ul>
         </div>
@@ -23,8 +23,16 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-    name: "Navbar"
+    name: "Navbar",
+    computed: {
+        ...mapGetters([
+            "cartQuantity",
+            "cartTotal"
+        ])
+    }
 }
 </script>
 
