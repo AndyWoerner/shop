@@ -17,7 +17,7 @@ const actions = {
         //nur Anfrage, daher kein payload
         axios.get("/api/products")
             .then((response) => {
-                console.log(response);
+                // console.log(response);
                 commit("UPDATE_PRODUCT_ITEMS", response.data)
             })
     }
