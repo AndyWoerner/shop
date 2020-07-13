@@ -17,7 +17,12 @@ const routes = [
     // jedes Objekt spezifiziert eine Route
     {
         path: "/login",
-        component: Signin
+        component: Signin,
+        beforeEnter: (to, from, next) => {
+            const token = localStorage.getItem("token")
+            if (token) next ("/")
+            else next()
+        }
     },
     {
         path: "/",
@@ -32,7 +37,8 @@ const routes = [
     {
         path: "/products/:id",
         component: ProductItem,
-        props: true //dynamische Argumente in der URL (:id) werden automatisch in die Props in der Component geschrieben
+        props: true
+        //dynamische Argumente in der URL (:id) werden automatisch in die Props in der Component geschrieben
     },
     { // muss am Ende sein!
         path: "*",
@@ -40,7 +46,21 @@ const routes = [
     }
 ]
 
-export const router = new VueRouter( {
+const router = new VueRouter( {
     mode: "history", // verhindert, dass "#/" im Browser / URL Feld angezeigt wird
     routes
 })
+
+//Globaler Route Guard
+router.beforeEach((to, from, next) => {
+    const token = localStorage.getItem("token")
+    //wenn token nicht gesetzt ist und wir nicht von der Login-Seite kommen, werden wir auf die Login Seite geschickt.
+    if (!token && to.path !== "/login") {
+        next("/login")
+    //wenn der token gesetzt ist oder wir von der Login Seite kommen, passiert das normale routing.
+    } else {
+        next()
+    }
+})
+
+export default router
