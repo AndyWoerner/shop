@@ -2,7 +2,10 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
-        <Navbar />
+        <!-- Navbar wird nur angezeigt, wenn wir nicht eingeloggt sind -->
+        <Navbar 
+          v-if="$route.path !== '/login'"
+        />
         <router-view></router-view>
       </div>
 
