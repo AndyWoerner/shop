@@ -9,6 +9,7 @@ import Signin from "./components/auth/Signin"
 import ProductList from "./components/product/ProductList"
 import CartList from "./components/cart/CartList"
 import ProductItem from "./components/product/ProductItem"
+import Checkout from "./components/cart/Checkout"
 
 //error components
 import NotFound from "./components/error/NotFound"
@@ -39,6 +40,10 @@ const routes = [
         component: ProductItem,
         props: true
         //dynamische Argumente in der URL (:id) werden automatisch in die Props in der Component geschrieben
+    },
+    {
+        path: "/checkout",
+        component: Checkout
     },
     { // muss am Ende sein!
         path: "*",
