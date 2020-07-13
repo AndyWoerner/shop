@@ -3,9 +3,14 @@
     <img src="https://picsum.photos/200" class="card-img-top" />
     <ul class="actions">
       <li>
-        <button class="btn bg-vue" data-tip="Anschauen">
+        <router-link
+          tag="button" 
+          class="btn bg-vue" 
+          data-tip="Anschauen"
+          :to="'/products/'+productItem.id"
+        >
           <i class="fa fa-search"></i>
-        </button>
+        </router-link>
       </li>
       <li>
         <button

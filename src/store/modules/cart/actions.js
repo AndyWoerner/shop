@@ -9,7 +9,7 @@ export const actions = {
             })
     },
     addCartItem({ commit }, payload){
-        axios.post("/api/cart", payload)
+        return axios.post("/api/cart", payload)
         .then((response) => {
             commit(types.UPDATE_CART_ITEMS, response.data)
         }) //wenn wir einen Datensatz hinzufügen in den Warenkorb, bekommen wir den kompletten Inhalt des aktuellen Warenkorb zurückgeliefert
