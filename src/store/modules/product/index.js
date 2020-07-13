@@ -13,9 +13,9 @@ const mutations = {
 }
 
 const actions = {
-    getProductItems({ commit }) {
-        //nur Anfrage, daher kein payload
-        axios.get("/api/products")
+    getProductItems({ commit }, token) {
+        //token wird hier mitgeliefert
+        axios.get(`/api/products?token=${token}`)
             .then((response) => {
                 // console.log(response);
                 commit("UPDATE_PRODUCT_ITEMS", response.data)

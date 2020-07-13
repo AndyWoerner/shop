@@ -2,14 +2,23 @@ import Vue from "vue"
 import VueRouter from "vue-router"
 
 Vue.use(VueRouter)
+//öffentliche components
+import Signin from "./components/auth/Signin"
 
+//interne components
 import ProductList from "./components/product/ProductList"
 import CartList from "./components/cart/CartList"
 import ProductItem from "./components/product/ProductItem"
+
+//error components
 import NotFound from "./components/error/NotFound"
 
 const routes = [
     // jedes Objekt spezifiziert eine Route
+    {
+        path: "/login",
+        component: Signin
+    },
     {
         path: "/",
         // welche Component soll unter diesem Pfad sichtbar sein

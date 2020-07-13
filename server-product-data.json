@@ -26,5 +26,33 @@
         "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam.",
         "price": 119.99,
         "origPrice": 199.99
+    },
+    {
+        "id": 5,
+        "title": "Die Uhr",
+        "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam.",
+        "price": 139.99,
+        "origPrice": 169.99
+    },
+    {
+        "id": 6,
+        "title": "Die Hose",
+        "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam.",
+        "price": 79.99,
+        "origPrice": 99.99
+    },
+    {
+        "id": 7,
+        "title": "Den Pullover",
+        "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam.",
+        "price": 99.99,
+        "origPrice": 99.99
+    },
+    {
+        "id": 8,
+        "title": "Die Schuhe",
+        "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam.",
+        "price": 119.99,
+        "origPrice": 199.99
     }
 ]
