@@ -3,9 +3,7 @@
     <div class="row">
       <div class="col-12">
         <!-- Navbar wird nur angezeigt, wenn wir nicht eingeloggt sind -->
-        <Navbar 
-          v-if="$route.path !== '/login'"
-        />
+        <Navbar v-if="$route.path !== '/login'" />
         <router-view></router-view>
       </div>
 
@@ -25,6 +23,9 @@
 </template>
 
 <script>
+
+import { mapGetters } from "vuex"
+
 import Navbar from "./components/Navbar";
 // import CartList from "./components/cart/CartList";
 // import ProductList from "./components/product/ProductList";
@@ -36,12 +37,26 @@ export default {
     // CartList,
     // ProductList
   },
+  computed: {
+    ...mapGetters([
+      "token"
+    ])
+  },
   created() {
     const token = localStorage.getItem("token");
 
     if (token) {
       this.$store.dispatch("getCartItems", token);
       this.$store.dispatch("getProductItems", token);
+    }
+  },
+  watch: {
+    // token(newValue, oldValue)
+    token(){
+      if(this.token){
+        this.$store.dispatch("getCartItems", this.token);
+      this.$store.dispatch("getProductItems", this.token);
+      }
     }
   }
 };
